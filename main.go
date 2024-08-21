@@ -1,12 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"os"
 
-	"github.com/marvin-min/learn-go-with-tests/hello_world"
+	"github.com/marvin-min/learn-go-with-tests/di"
 )
 
 func main() {
-	fmt.Println(hello_world.Hello("world", ""))
-
+	di.Greet(os.Stdout, "Eddile")
 }

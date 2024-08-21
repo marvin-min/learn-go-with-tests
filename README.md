@@ -1,5 +1,5 @@
 https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/maps#write-the-test-first-6
-
+https://github.com/neo-liang-sap/book/tree/master$$
 Refactoring and your tooling
 A big emphasis of this book is around the importance of refactoring.
 
