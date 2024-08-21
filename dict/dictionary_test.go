@@ -42,6 +42,27 @@ func TestAdd(t *testing.T) {
 	})
 }
 
+func TestUpdate(t *testing.T) {
+	t.Run("update existing key in dictionary ", func(t *testing.T) {
+		key := "test"
+		word := "init content"
+		dict := Dictionary{key: word}
+		newContent := "new content"
+		dict.Update(key, newContent)
+		assertDefinition(dict, key, newContent, t)
+	})
+
+	t.Run("update non existing key in dictionary ", func(t *testing.T) {
+		key := "test"
+		word := "init content"
+		dict := Dictionary{key: word}
+		newKey := "newKey"
+		newContent := "new content"
+		err := dict.Update(newKey, newContent)
+		assertError(t, err, ErrorKeyDoeNotExist)
+	})
+}
+
 func assertDefinition(d Dictionary, word, definition string, t *testing.T) {
 	t.Helper()
 	got, err := d.Search(word)

@@ -1,4 +1,4 @@
-https://quii.gitbook.io/learn-go-with-tests/v/master/go-fundamentals/install-go
+https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/maps#write-the-test-first-6
 
 Refactoring and your tooling
 A big emphasis of this book is around the importance of refactoring.
