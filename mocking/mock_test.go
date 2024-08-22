@@ -14,15 +14,6 @@ type SpySleeper struct {
 	Calls int
 }
 
-type ConfigurableSleeper struct {
-	duration time.Duration
-	sleep    func(time.Duration)
-}
-
-func (c *ConfigurableSleeper) Sleep() {
-	c.sleep(c.duration)
-}
-
 type SpyTime struct {
 	durationSlept time.Duration
 }
