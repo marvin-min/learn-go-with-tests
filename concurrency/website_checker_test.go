@@ -11,7 +11,7 @@ func mockWebsiteChecker(url string) bool {
 }
 
 func slowStubWebsiteChecker(_ string) bool {
-	time.Sleep(50 * time.Millisecond)
+	time.Sleep(1000 * time.Millisecond)
 	return true
 }
 func BenchmarkCheckWebsites(b *testing.B) {
