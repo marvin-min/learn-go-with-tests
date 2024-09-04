@@ -1,6 +1,6 @@
 https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/mocking#still-some-problems
 
-https://github.com/neo-liang-sap/book/tree/master$$
+https://github.com/neo-liang-sap/book/tree/master
 Refactoring and your tooling
 A big emphasis of this book is around the importance of refactoring.
 
