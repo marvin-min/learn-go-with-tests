@@ -3,6 +3,7 @@ package intro_to_property_based_tests
 import (
 	"fmt"
 	"testing"
+	"testing/quick"
 )
 
 func assetEqual(got, want string, t *testing.T) {
@@ -13,7 +14,7 @@ func assetEqual(got, want string, t *testing.T) {
 }
 
 var cases = []struct {
-	Arabic int
+	Arabic uint16
 	Roman  string
 }{
 	{Arabic: 1, Roman: "I"},
@@ -64,5 +65,18 @@ func TestRomanToArabic(t *testing.T) {
 				t.Errorf("got %d, want %d", got, test.Arabic)
 			}
 		})
+	}
+}
+
+func TestPropertyOfConversion(t *testing.T) {
+	assertion := func(arabic uint16) bool {
+		roman := ConvertToRoman(arabic)
+		fromRoman := ConvertToArabic(roman)
+		return fromRoman == arabic
+	}
+	if err := quick.Check(assertion, &quick.Config{
+		MaxCount: 1000,
+	}); err != nil {
+		t.Error("failed checks", err)
 	}
 }

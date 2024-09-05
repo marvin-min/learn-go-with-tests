@@ -1,7 +1,6 @@
 package intro_to_property_based_tests
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -13,7 +12,7 @@ import (
 	**/
 
 type RomanNumeral struct {
-	Value  int
+	Value  uint16
 	Symbol string
 }
 
@@ -33,7 +32,7 @@ var allRomanNumerals = []RomanNumeral{
 	{1, "I"},
 }
 
-func ConvertToRoman(arabic int) string {
+func ConvertToRoman(arabic uint16) string {
 	var result strings.Builder
 	for _, numeral := range allRomanNumerals {
 		for arabic >= numeral.Value {
@@ -70,14 +69,14 @@ func ConvertToRoman(arabic int) string {
 	return result.String()
 }
 
-func ConvertToArabic(roman string) int {
-	var arabic = 0
+func ConvertToArabic(roman string) uint16 {
+	var arabic uint16 = 0
 	for _, numeral := range allRomanNumerals {
 		// fmt.Println(roman, " VS ", numeral.Symbol, "---->", strings.HasPrefix(roman, numeral.Symbol))
 		for strings.HasPrefix(roman, numeral.Symbol) {
 			arabic += numeral.Value
 			roman = strings.TrimPrefix(roman, numeral.Symbol)
-			fmt.Println(roman)
+			// fmt.Println(roman)
 		}
 	}
 	return arabic
