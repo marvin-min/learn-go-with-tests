@@ -1,6 +1,7 @@
 package intro_to_property_based_tests
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -67,4 +68,16 @@ func ConvertToRoman(arabic int) string {
 	// 	result.WriteString("I")
 	// }
 	return result.String()
+}
+
+func ConvertToArabic(roman string) int {
+	var arabic = 0
+	for _, numeral := range allRomanNumerals {
+		fmt.Println(roman, " VS ", numeral.Symbol, "---->", strings.HasPrefix(roman, numeral.Symbol))
+		for strings.HasPrefix(roman, numeral.Symbol) {
+			arabic += numeral.Value
+			roman = strings.TrimPrefix(roman, numeral.Symbol)
+		}
+	}
+	return arabic
 }
