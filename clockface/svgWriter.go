@@ -8,6 +8,7 @@ import (
 
 const (
 	secondHandLength = 90
+	minuteHandLength = 80
 	clockCentreX     = 150
 	clockCentreY     = 150
 )
@@ -15,8 +16,10 @@ const (
 func SVGWriter(w io.Writer, t time.Time) {
 	io.WriteString(w, svgStart)
 	io.WriteString(w, bezel)
-	p := SecondHand(t)
-	fmt.Fprintf(w, `<line x1="150" y1="150" x2="%.3f" y2="%.3f" style="fill:none;stroke:#f00;stroke-width:3px;"/>`, p.X, p.Y)
+	second := SecondHand(t)
+	min := MinuteHand(t)
+	fmt.Fprintf(w, `<line x1="150" y1="150" x2="%.3f" y2="%.3f" style="fill:none;stroke:#f00;stroke-width:3px;"/>`, second.X, second.Y)
+	fmt.Fprintf(w, `<line x1="150" y1="150" x2="%.3f" y2="%.3f" style="fill:none;stroke:#f00;stroke-width:3px;"/>`, min.X, min.Y)
 	io.WriteString(w, svgEnd)
 }
 
