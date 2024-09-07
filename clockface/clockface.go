@@ -5,6 +5,15 @@ import (
 	"time"
 )
 
+const (
+	secondsInHalfClock = 30
+	secondsInClock     = 2 * secondsInHalfClock
+	minutesInHalfClock = 30
+	minutesInClock     = 2 * minutesInHalfClock
+	hoursInHalfClock   = 6
+	hoursInClock       = 2 * hoursInHalfClock
+)
+
 type Point struct {
 	X float64
 	Y float64
@@ -25,23 +34,35 @@ func makeHand(p Point, length float64) Point {
 	p = Point{p.X + clockCentreX, p.Y + clockCentreY}
 	return p
 }
+
 func secondsInRadians(t time.Time) float64 {
-	return (math.Pi / (30 / (float64(t.Second()))))
+	return (math.Pi / (secondsInHalfClock / (float64(t.Second()))))
+}
+func minutesInRadians(t time.Time) float64 {
+	return (secondsInRadians(t) / minutesInClock) +
+		(math.Pi / (minutesInHalfClock / float64(t.Minute())))
+}
+func hoursInRadians(t time.Time) float64 {
+	return (minutesInRadians(t) / hoursInClock) +
+		(math.Pi / (hoursInHalfClock / float64(t.Hour()%hoursInClock)))
 }
 
 func secondHandPoint(t time.Time) Point {
 	angle := secondsInRadians(t)
 	return angleToPoint(angle)
 }
-
-func minutesInRadians(t time.Time) float64 {
-	return (secondsInRadians(t) / 60) +
-		(math.Pi / (30 / float64(t.Minute())))
-}
 func minuteHandPoint(t time.Time) Point {
 	angle := minutesInRadians(t)
 
 	return angleToPoint(angle)
+}
+func hourHandPoint(t time.Time) Point {
+	angle := hoursInRadians(t)
+	return angleToPoint(angle)
+}
+func hourHand(t time.Time) Point {
+	p := makeHand(hourHandPoint(t), hourHandLength)
+	return p
 }
 
 func angleToPoint(angle float64) Point {
