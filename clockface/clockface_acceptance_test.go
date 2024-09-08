@@ -150,4 +150,5 @@ func simpleTime(hours, minutes, seconds int) time.Time {
 func testName(t time.Time) string {
 	return t.Format("15:04:05")
 }
-https://github.com/quii/learn-go-with-tests/tree/main/math/vFinal/clockface
+
+// https://github.com/quii/learn-go-with-tests/tree/main/math/vFinal/clockface
