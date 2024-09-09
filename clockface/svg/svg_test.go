@@ -1,4 +1,4 @@
-package clockface_test
+package svg_test
 
 import (
 	"bytes"
@@ -6,11 +6,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/marvin-min/learn-go-with-tests/clockface"
+	"github.com/marvin-min/learn-go-with-tests/clockface/svg"
 )
 
-type Svg struct {
+type SVG struct {
 	XMLName xml.Name `xml:"svg"`
+	Text    string   `xml:",chardata"`
 	Xmlns   string   `xml:"xmlns,attr"`
 	Width   string   `xml:"width,attr"`
 	Height  string   `xml:"height,attr"`
@@ -19,11 +20,7 @@ type Svg struct {
 	Circle  Circle   `xml:"circle"`
 	Line    []Line   `xml:"line"`
 }
-type Circle struct {
-	Cx float64 `xml:"cx,attr"`
-	Cy float64 `xml:"cy,attr"`
-	R  float64 `xml:"r,attr"`
-}
+
 type Line struct {
 	X1 float64 `xml:"x1,attr"`
 	Y1 float64 `xml:"y1,attr"`
@@ -31,26 +28,12 @@ type Line struct {
 	Y2 float64 `xml:"y2,attr"`
 }
 
-func TestSVGWriterAtMidnight(t *testing.T) {
-	tm := time.Date(1337, time.January, 1, 0, 0, 0, 0, time.UTC)
-	b := bytes.Buffer{}
-
-	clockface.SVGWriter(&b, tm)
-
-	svg := Svg{}
-
-	xml.Unmarshal(b.Bytes(), &svg)
-	want := Line{150, 150, 150, 60}
-
-	for _, line := range svg.Line {
-		if line == want {
-			return
-		}
-	}
-
-	t.Errorf("Expected to find the second hand line %+v, in the SVG lines %+v", want, svg.Line)
-
+type Circle struct {
+	Cx float64 `xml:"cx,attr"`
+	Cy float64 `xml:"cy,attr"`
+	R  float64 `xml:"r,attr"`
 }
+
 func TestSVGWriterSecondHand(t *testing.T) {
 	cases := []struct {
 		time time.Time
@@ -69,9 +52,9 @@ func TestSVGWriterSecondHand(t *testing.T) {
 	for _, c := range cases {
 		t.Run(testName(c.time), func(t *testing.T) {
 			b := bytes.Buffer{}
-			clockface.SVGWriter(&b, c.time)
+			svg.Write(&b, c.time)
 
-			svg := Svg{}
+			svg := SVG{}
 			xml.Unmarshal(b.Bytes(), &svg)
 
 			if !containsLine(c.line, svg.Line) {
@@ -81,7 +64,7 @@ func TestSVGWriterSecondHand(t *testing.T) {
 	}
 }
 
-func TestSVGWriterMinuteHand(t *testing.T) {
+func TestSVGWriterMinutedHand(t *testing.T) {
 	cases := []struct {
 		time time.Time
 		line Line
@@ -95,9 +78,9 @@ func TestSVGWriterMinuteHand(t *testing.T) {
 	for _, c := range cases {
 		t.Run(testName(c.time), func(t *testing.T) {
 			b := bytes.Buffer{}
-			clockface.SVGWriter(&b, c.time)
+			svg.Write(&b, c.time)
 
-			svg := Svg{}
+			svg := SVG{}
 			xml.Unmarshal(b.Bytes(), &svg)
 
 			if !containsLine(c.line, svg.Line) {
@@ -121,9 +104,9 @@ func TestSVGWriterHourHand(t *testing.T) {
 	for _, c := range cases {
 		t.Run(testName(c.time), func(t *testing.T) {
 			b := bytes.Buffer{}
-			clockface.SVGWriter(&b, c.time)
+			svg.Write(&b, c.time)
 
-			svg := Svg{}
+			svg := SVG{}
 			xml.Unmarshal(b.Bytes(), &svg)
 
 			if !containsLine(c.line, svg.Line) {
@@ -131,7 +114,6 @@ func TestSVGWriterHourHand(t *testing.T) {
 			}
 		})
 	}
-
 }
 
 func containsLine(l Line, ls []Line) bool {
@@ -150,5 +132,3 @@ func simpleTime(hours, minutes, seconds int) time.Time {
 func testName(t time.Time) string {
 	return t.Format("15:04:05")
 }
-
-// https://github.com/quii/learn-go-with-tests/tree/main/math/vFinal/clockface
