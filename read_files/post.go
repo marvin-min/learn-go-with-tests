@@ -52,17 +52,21 @@ func newPost(postFile io.Reader) (Post, error) {
 		scanner.Scan()
 		return strings.TrimPrefix(scanner.Text(), tagName)
 	}
+	return Post{
+		Title:       readLine(titleSeparator),
+		Description: readLine(descriptionSeparator),
+		Tags:        strings.Split(readLine(tagSeparator), ", "),
+		Body:        readBody(scanner),
+	}, nil
+}
 
-	title := readLine(titleSeparator)
-	description := readLine(descriptionSeparator)
-	tags := strings.Split(readLine(tagSeparator), ", ")
-
-	scanner.Scan() // ignore a line
+func readBody(scanner *bufio.Scanner) string {
+	scanner.Scan()
 
 	buf := bytes.Buffer{}
 	for scanner.Scan() {
 		fmt.Fprintln(&buf, scanner.Text())
 	}
 	body := strings.TrimSuffix(buf.String(), "\n")
-	return Post{Title: title, Description: description, Tags: tags, Body: body}, nil
+	return body
 }
