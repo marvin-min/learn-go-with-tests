@@ -1,6 +1,7 @@
 package read_files
 
 import (
+	"bufio"
 	"io"
 	"io/fs"
 )
@@ -38,10 +39,15 @@ func getPost(fileSystem fs.FS, fileName string) (Post, error) {
 	return newPost(postFile)
 }
 func newPost(postFile io.Reader) (Post, error) {
-	postData, err := io.ReadAll(postFile)
-	if err != nil {
-		return Post{}, err
+	scanner := bufio.NewScanner(postFile)
+	readLine := func() string {
+		scanner.Scan()
+		return scanner.Text()
 	}
-	post := Post{Title: string(postData)[7:]}
+
+	title := readLine()[7:]
+	description := readLine()[13:]
+
+	post := Post{Title: title, Description: description}
 	return post, nil
 }
