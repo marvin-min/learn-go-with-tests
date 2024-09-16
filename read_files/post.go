@@ -2,6 +2,8 @@ package read_files
 
 import (
 	"bufio"
+	"bytes"
+	"fmt"
 	"io"
 	"io/fs"
 	"strings"
@@ -14,8 +16,8 @@ const (
 )
 
 type Post struct {
-	Title, Description string
-	Tags               []string
+	Title, Description, Body string
+	Tags                     []string
 }
 
 func NewPostFromFS(fileSystem fs.FS) ([]Post, error) {
@@ -55,5 +57,12 @@ func newPost(postFile io.Reader) (Post, error) {
 	description := readLine(descriptionSeparator)
 	tags := strings.Split(readLine(tagSeparator), ", ")
 
-	return Post{Title: title, Description: description, Tags: tags}, nil
+	scanner.Scan() // ignore a line
+
+	buf := bytes.Buffer{}
+	for scanner.Scan() {
+		fmt.Fprintln(&buf, scanner.Text())
+	}
+	body := strings.TrimSuffix(buf.String(), "\n")
+	return Post{Title: title, Description: description, Tags: tags, Body: body}, nil
 }
