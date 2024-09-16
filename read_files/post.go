@@ -10,12 +10,12 @@ import (
 const (
 	titleSeparator       = "Title: "
 	descriptionSeparator = "Description: "
+	tagSeparator         = "Tags: "
 )
 
 type Post struct {
 	Title, Description string
-	// , Description, Body string
-	// Tags                     []string
+	Tags               []string
 }
 
 func NewPostFromFS(fileSystem fs.FS) ([]Post, error) {
@@ -53,6 +53,7 @@ func newPost(postFile io.Reader) (Post, error) {
 
 	title := readLine(titleSeparator)
 	description := readLine(descriptionSeparator)
+	tags := strings.Split(readLine(tagSeparator), ", ")
 
-	return Post{Title: title, Description: description}, nil
+	return Post{Title: title, Description: description, Tags: tags}, nil
 }
