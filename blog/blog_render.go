@@ -22,4 +22,3 @@ func Render(w io.Writer, p Post) error {
 	}
 	return err
 }
-https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/html-templates

@@ -4,13 +4,14 @@ import (
 	"bytes"
 	"testing"
 
+	approvals "github.com/approvals/go-approval-tests"
 	"github.com/marvin-min/learn-go-with-tests/blog"
 )
 
 func TestRender(t *testing.T) {
 	var (
 		aPost = blog.Post{
-			Title:       "hello world",
+			Title:       "hello world,oop",
 			Body:        "This is a post",
 			Description: "This is a description",
 			Tags:        []string{"go", "tdd"},
@@ -18,16 +19,11 @@ func TestRender(t *testing.T) {
 	)
 	t.Run("it converts a single post into HTML", func(t *testing.T) {
 		buf := bytes.Buffer{}
-		err := blog.Render(&buf, aPost)
 
-		if err != nil {
+		if err := blog.Render(&buf, aPost); err != nil {
 			t.Fatal(err)
 		}
 
-		got := buf.String()
-		want := `<h1>hello world</h1><p>This is a description</p>Tags: <ul><li>go</li><li>tdd</li></ul>`
-		if got != want {
-			t.Errorf("got '%s' want '%s'", got, want)
-		}
+		approvals.VerifyString(t, buf.String())
 	})
 }

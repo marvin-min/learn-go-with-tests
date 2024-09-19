@@ -3,6 +3,7 @@ module github.com/marvin-min/learn-go-with-tests
 go 1.21.5
 
 require (
+	github.com/approvals/go-approval-tests v0.0.0-20240417152556-434b9105e958 // indirect
 	github.com/cilium/ebpf v0.16.0 // indirect
 	github.com/cosiner/argv v0.1.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.4 // indirect
