@@ -2,7 +2,8 @@ To learn:
 - https://blog.golang.org/laws-of-reflection
 - https://quii.dev/The_Web_I_Want
 - https://www.csszengarden.com/
-
+- https://www.calhoun.io/intro-to-templates-p1-contextual-encoding/
+- https://hotwired.dev/
 
 【原始解法】牛在吃草，草在匀速生长。利用公式，设每头牛每天吃的草量为“1”，
 10头牛20天吃草的量为10×20=200份，
