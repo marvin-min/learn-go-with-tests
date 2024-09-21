@@ -1,18 +1,18 @@
 package generics
 
-type MyIntStack = Stack
-type MyStringStack = Stack
-type Stack struct {
-	values []interface{}
+// type MyIntStack = Stack
+// type MyStringStack = Stack
+type Stack[T any] struct {
+	values []T
 }
 
-func (mis *MyIntStack) Push(value interface{}) {
+func (mis *Stack[T]) Push(value T) {
 	mis.values = append(mis.values, value)
 }
 
-func (mis *MyIntStack) Pop() (interface{}, bool) {
+func (mis *Stack[T]) Pop() (T, bool) {
 	if mis.IsEmpty() {
-		var zero interface{}
+		var zero T
 		return zero, false
 	}
 	index := len(mis.values) - 1
@@ -21,6 +21,6 @@ func (mis *MyIntStack) Pop() (interface{}, bool) {
 	return el, true
 }
 
-func (mis *MyIntStack) IsEmpty() bool {
+func (mis *Stack[T]) IsEmpty() bool {
 	return len(mis.values) == 0
 }
