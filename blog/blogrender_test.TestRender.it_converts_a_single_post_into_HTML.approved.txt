@@ -20,11 +20,14 @@
 <main>
 
 
-<h1>hello world,oop</h1>
+<h1>hello world</h1>
 
 <p>This is a description</p>
 
 Tags: <ul><li>go</li><li>tdd</li></ul>
+
+<div><h1 id="this-is-a-post-welcome-to-my-amazing-blog">This is a post, Welcome to my <strong>amazing blog</strong>.</h1>
+</div>
 
 
 </main>

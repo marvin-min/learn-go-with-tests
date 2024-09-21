@@ -12,8 +12,8 @@ import (
 func TestRender(t *testing.T) {
 	var (
 		aPost = blog.Post{
-			Title:       "hello world,oop",
-			Body:        "This is a post",
+			Title:       "hello world",
+			Body:        `# This is a post, Welcome to my **amazing blog**.`,
 			Description: "This is a description",
 			Tags:        []string{"go", "tdd"},
 		}
@@ -52,4 +52,3 @@ func BenchmarkRender(b *testing.B) {
 		postRenderer.Render(io.Discard, aPost)
 	}
 }
-https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/html-templates#back-to-the-real-work
