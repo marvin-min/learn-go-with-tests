@@ -32,6 +32,16 @@ func TestRender(t *testing.T) {
 
 		approvals.VerifyString(t, buf.String())
 	})
+
+	t.Run("it renders an index of posts", func(t *testing.T) {
+		buf := bytes.Buffer{}
+		posts := []blog.Post{{Title: "Golang TDD"}, {Title: "Rust TDD"}, {Title: "Ruby TDD"}}
+		if err := postRenderer.RenderIndex(&buf, posts); err != nil {
+			t.Fatal(err)
+		}
+		approvals.VerifyString(t, buf.String())
+	})
+
 }
 func BenchmarkRender(b *testing.B) {
 	var (

@@ -34,9 +34,18 @@ func (r *PostRenderer) Render(w io.Writer, p Post) error {
 	return r.templ.ExecuteTemplate(w, "blog.html", newPostVM(p, r))
 }
 
+func (r *PostRenderer) RenderIndex(w io.Writer, posts []Post) error {
+	data := indexData{Posts: posts}
+	return r.templ.ExecuteTemplate(w, "index.html", data)
+}
+
 type postViewModel struct {
 	Post
 	HTMLBody template.HTML
+}
+
+type indexData struct {
+	Posts []Post
 }
 
 func newPostVM(p Post, r *PostRenderer) postViewModel {
