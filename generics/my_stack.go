@@ -1,16 +1,19 @@
 package generics
 
-type MyIntStack struct {
-	values []int
+type MyIntStack = Stack
+type MyStringStack = Stack
+type Stack struct {
+	values []interface{}
 }
 
-func (mis *MyIntStack) Push(value int) {
+func (mis *MyIntStack) Push(value interface{}) {
 	mis.values = append(mis.values, value)
 }
 
-func (mis *MyIntStack) Pop() (int, bool) {
+func (mis *MyIntStack) Pop() (interface{}, bool) {
 	if mis.IsEmpty() {
-		return 0, false
+		var zero interface{}
+		return zero, false
 	}
 	index := len(mis.values) - 1
 	el := mis.values[index]

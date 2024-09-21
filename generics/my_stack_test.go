@@ -18,8 +18,8 @@ func TestMyIntStack(t *testing.T) {
 		AssertFalse(t, mis.IsEmpty())
 		value, _ := mis.Pop()
 		AssertEqual(t, value, 123)
-		value, _ = mis.Pop()
-		AssertEqual(t, value, 3)
+		value1, _ := mis.Pop()
+		AssertEqual(t, value1, 3)
 
 		mis.Pop()
 		mis.Pop()
