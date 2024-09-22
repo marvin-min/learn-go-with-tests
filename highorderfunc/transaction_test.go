@@ -19,3 +19,9 @@ func TestBadBank(t *testing.T) {
 	}
 	AssertEqual(t, BalanceFor(transactions, "Alice"), -5)
 }
+func AssertEqual[T comparable](t testing.TB, got, want T) {
+	t.Helper()
+	if got != want {
+		t.Errorf("got %v, want %v", got, want)
+	}
+}
