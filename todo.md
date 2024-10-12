@@ -5,6 +5,8 @@ To learn:
 - https://www.calhoun.io/intro-to-templates-p1-contextual-encoding/
 - https://hotwired.dev/
 https://go.dev/blog/examples
+
+https://testcontainers.com/guides/getting-started-with-testcontainers-for-go/
 【原始解法】牛在吃草，草在匀速生长。利用公式，设每头牛每天吃的草量为“1”，
 10头牛20天吃草的量为10×20=200份，
 15头牛吃10天吃草的量为15×10=150份，
