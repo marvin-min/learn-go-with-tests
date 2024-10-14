@@ -9,5 +9,4 @@ func PlayerServer(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "20")
 }
 
-
-https://quii.gitbook.io/learn-go-with-tests/build-an-application/http-server
+// https://quii.gitbook.io/learn-go-with-tests/build-an-application/http-server#http.handlerfunc
