@@ -5,6 +5,14 @@ To learn:
 - https://www.calhoun.io/intro-to-templates-p1-contextual-encoding/
 - https://hotwired.dev/
 https://go.dev/blog/examples
+
+Dave Farley - How to write acceptance tests https://www.youtube.com/watch?v=JDD5EEJgpHU
+
+Nat Pryce - E2E functional tests that can run in milliseconds https://www.youtube.com/watch?v=Fk4rCn4YLLU
+
+http://www.growing-object-oriented-software.com/
+https://www.youtube.com/watch?v=ZMWJCk_0WrY
+
 【原始解法】牛在吃草，草在匀速生长。利用公式，设每头牛每天吃的草量为“1”，
 10头牛20天吃草的量为10×20=200份，
 15头牛吃10天吃草的量为15×10=150份，
