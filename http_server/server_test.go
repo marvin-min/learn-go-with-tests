@@ -27,6 +27,7 @@ func TestGetPlayers(t *testing.T) {
 		request := newGetScoreRequest("Pepper")
 		response := httptest.NewRecorder()
 		server.ServeHTTP(response, request)
+		assertStatus(response.Code, http.StatusOK, t)
 		assetResponseBody(response.Body.String(), "20", t)
 	})
 
@@ -34,7 +35,19 @@ func TestGetPlayers(t *testing.T) {
 		request := newGetScoreRequest("Floyd")
 		response := httptest.NewRecorder()
 		server.ServeHTTP(response, request)
+		assertStatus(response.Code, http.StatusOK, t)
 		assetResponseBody(response.Body.String(), "10", t)
+	})
+
+	t.Run("returns 404 on missing players", func(t *testing.T) {
+		request := newGetScoreRequest("Apollo")
+		response := httptest.NewRecorder()
+		server.ServeHTTP(response, request)
+		got := response.Code
+		want := http.StatusNotFound
+		if got != want {
+			t.Errorf("got %d want %d", got, want)
+		}
 	})
 }
 
@@ -45,6 +58,12 @@ func assetResponseBody(got string, want string, t *testing.T) {
 	}
 }
 
+func assertStatus(got, want int, t *testing.T) {
+	t.Helper()
+	if got != want {
+		t.Errorf("got '%d', want '%d'", got, want)
+	}
+}
 func newGetScoreRequest(name string) *http.Request {
 	request, _ := http.NewRequest(http.MethodGet, fmt.Sprintf("/players/%s", name), nil)
 	return request
