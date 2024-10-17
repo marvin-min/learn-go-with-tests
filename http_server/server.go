@@ -24,17 +24,4 @@ func (p *PlayerServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(http.StatusNotFound)
 	fmt.Fprint(w, score)
-
 }
-
-func GetPlayerScore(name string) string {
-	if name == "Pepper" {
-		return "20"
-	}
-	if name == "Floyd" {
-		return "10"
-	}
-	return ""
-}
-
-// https://quii.gitbook.io/learn-go-with-tests/build-an-application/http-server#http.handlerfunc
