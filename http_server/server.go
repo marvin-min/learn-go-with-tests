@@ -47,3 +47,4 @@ func (p *PlayerServer) showScore(r *http.Request, w http.ResponseWriter) {
 	}
 	fmt.Fprint(w, score)
 }
+https://quii.gitbook.io/learn-go-with-tests/build-an-application/json
