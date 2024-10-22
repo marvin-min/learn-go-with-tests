@@ -14,6 +14,7 @@ type Player struct {
 type PlayerStore interface {
 	GetPlayerScore(name string) int
 	RecordWin(name string)
+	GetLeague() []Player
 }
 
 type PlayerServer struct {
@@ -37,9 +38,8 @@ func NewPlayerServer(store PlayerStore) *PlayerServer {
 }
 
 func (p *PlayerServer) leagueHandler(w http.ResponseWriter, r *http.Request) {
-	leagueTable := p.getLeagueTable()
 
-	err := json.NewEncoder(w).Encode(leagueTable)
+	err := json.NewEncoder(w).Encode(p.store.GetLeague())
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return

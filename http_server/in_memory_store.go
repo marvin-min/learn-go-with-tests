@@ -7,6 +7,9 @@ type InMemoryStore struct {
 	lock  sync.RWMutex
 }
 
+func (i *InMemoryStore) GetLeague() []Player {
+	return nil
+}
 func NewInMemoryStore() *InMemoryStore {
 	return &InMemoryStore{map[string]int{}, sync.RWMutex{}}
 }
