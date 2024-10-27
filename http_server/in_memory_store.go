@@ -8,6 +8,7 @@ type InMemoryStore struct {
 }
 
 func (i *InMemoryStore) GetLeague() []Player {
+	// for k,v range i.store
 	return nil
 }
 func NewInMemoryStore() *InMemoryStore {
