@@ -8,8 +8,11 @@ type InMemoryStore struct {
 }
 
 func (i *InMemoryStore) GetLeague() []Player {
-	// for k,v range i.store
-	return nil
+	var league []Player
+	for k, v := range i.store {
+		league = append(league, Player{k, v})
+	}
+	return league
 }
 func NewInMemoryStore() *InMemoryStore {
 	return &InMemoryStore{map[string]int{}, sync.RWMutex{}}
