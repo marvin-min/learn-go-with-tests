@@ -38,3 +38,4 @@ func assertScoreEquals(got int, want int, t *testing.T) {
 		t.Errorf("got %d want %d", got, want)
 	}
 }
+https://quii.gitbook.io/learn-go-with-tests/build-an-application/io#write-the-test-first-2
