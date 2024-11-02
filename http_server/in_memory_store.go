@@ -7,8 +7,8 @@ type InMemoryStore struct {
 	lock  sync.RWMutex
 }
 
-func (i *InMemoryStore) GetLeague() []Player {
-	var league []Player
+func (i *InMemoryStore) GetLeague() League {
+	var league League
 	for k, v := range i.store {
 		league = append(league, Player{k, v})
 	}

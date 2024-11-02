@@ -7,7 +7,10 @@ import (
 )
 
 func TestRecordingWinsAndRetrievingThem(t *testing.T) {
-	store := NewInMemoryStore()
+	database, cleanDatabase := createTempFile(t, "")
+	defer cleanDatabase()
+	store := &FileSystemPlayerStore{database}
+
 	server := NewPlayerServer(store)
 	player := "Pepper"
 	server.ServeHTTP(httptest.NewRecorder(), newPostWinRequest(player))

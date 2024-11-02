@@ -41,5 +41,3 @@ func others() {
 	}
 	fmt.Println(str)
 }
-
-https://quii.gitbook.io/learn-go-with-tests/go-fundamentals/revisiting-arrays-and-slices-with-generics
